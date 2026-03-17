@@ -1,0 +1,7 @@
+name: mcpize
+version: 1.0.0
+description: "MCPize Suite — from idea to published MCP server"
+skills:
+  - skills/idea
+  - skills/build
+  - skills/publish

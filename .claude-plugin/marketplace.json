@@ -1,0 +1,24 @@
+{
+  "name": "mcpize-skills",
+  "owner": {
+    "name": "MCPize",
+    "email": "hello@mcpize.com"
+  },
+  "metadata": {
+    "description": "MCPize Suite — idea → build → publish pipeline for MCP servers",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "mcpize",
+      "description": "Complete MCP server pipeline: discover ideas, build & test, publish to marketplace with SEO, pricing, and go-to-market content",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/idea",
+        "./skills/build",
+        "./skills/publish"
+      ]
+    }
+  ]
+}

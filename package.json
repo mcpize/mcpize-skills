@@ -1,0 +1,33 @@
+{
+  "name": "@mcpize/skills",
+  "version": "1.0.0",
+  "description": "MCPize Suite — universal skills for discovering, building, and publishing MCP servers across Claude Code, Cursor, Copilot, and 40+ AI agents",
+  "license": "MIT",
+  "author": {
+    "name": "MCPize",
+    "email": "hello@mcpize.com",
+    "url": "https://mcpize.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcpize/mcpize-skills.git"
+  },
+  "homepage": "https://mcpize.com",
+  "files": [
+    "skills/",
+    ".claude-plugin/",
+    ".skills"
+  ],
+  "keywords": [
+    "mcpize",
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "agent-skills",
+    "skillkit",
+    "claude-code",
+    "cursor",
+    "copilot",
+    "marketplace"
+  ]
+}
