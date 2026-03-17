@@ -13,7 +13,7 @@
       "name": "mcpize",
       "description": "Complete MCP server pipeline: discover ideas, build & test, publish to marketplace with SEO, pricing, and go-to-market content",
       "source": "./",
-      "strict": false,
+      "strict": true,
       "skills": [
         "./skills/idea",
         "./skills/build",
