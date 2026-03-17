@@ -82,27 +82,30 @@ Each skill picks up where the last one left off. Run all three in sequence, or j
 ```
 mcpize-skills/
   .claude-plugin/
-    plugin.json            # Plugin manifest
-    marketplace.json       # Marketplace catalog
-  skills/
-    idea/
-      SKILL.md             # The brainstorming skill
-      references/
-        mcp-landscape.md   # Market data, niches, monetization models
-    build/
-      SKILL.md             # The builder skill
-      references/
-        typescript-patterns.md
-        python-patterns.md
-        mcpize-yaml-reference.md
-        testing-patterns.md
-    publish/
-      SKILL.md             # The publisher skill
-      references/
-        quality-checklist.md
-        social-templates.md
-  .skills                  # SkillKit manifest (cross-IDE)
-  package.json             # npm distribution
+    marketplace.json         # Marketplace catalog
+  plugins/
+    mcpize/
+      .claude-plugin/
+        plugin.json          # Plugin manifest
+      skills/
+        idea/
+          SKILL.md           # The brainstorming skill
+          references/
+            mcp-landscape.md
+        build/
+          SKILL.md           # The builder skill
+          references/
+            typescript-patterns.md
+            python-patterns.md
+            mcpize-yaml-reference.md
+            testing-patterns.md
+        publish/
+          SKILL.md           # The publisher skill
+          references/
+            quality-checklist.md
+            social-templates.md
+  .skills                    # SkillKit manifest (cross-IDE)
+  package.json               # npm distribution
 ```
 
 ## You'll need

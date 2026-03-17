@@ -1,13 +1,8 @@
 {
   "name": "mcpize",
   "description": "MCPize Suite — from idea to published MCP server. Discover ideas (/mcpize:idea), build production-ready servers (/mcpize:build), publish to marketplace (/mcpize:publish).",
-  "version": "1.0.0",
   "author": {
     "name": "MCPize",
     "email": "hello@mcpize.com"
-  },
-  "homepage": "https://mcpize.com",
-  "repository": "https://github.com/mcpize/mcpize-skills",
-  "license": "MIT",
-  "keywords": ["mcp", "mcpize", "marketplace", "model-context-protocol", "mcp-server", "build", "publish"]
+  }
 }
