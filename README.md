@@ -40,10 +40,16 @@ That's it. Now run:
 
 Idea discovery, build, deploy, publish — all in one prompt.
 
-### Cursor, Copilot, Windsurf, and 40+ other agents
+### Cursor
 
 ```bash
-skillkit install mcpize/mcpize-skills
+npx skillkit install mcpize/mcpize-skills --agent cursor
+```
+
+### Copilot, Windsurf, and 40+ other agents
+
+```bash
+npx skillkit install mcpize/mcpize-skills
 ```
 
 [SkillKit](https://www.agenstskills.com/) auto-translates the skills into whatever format your agent needs.
