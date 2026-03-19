@@ -23,7 +23,9 @@ Three skills. One pipeline. You choose the idea, we handle the rest.
 /plugin install mcpize@mcpize-skills
 ```
 
-That's it. Now run:
+Then restart Claude Code (`/exit` and relaunch) to load the skills.
+
+Now run:
 
 ```
 /mcpize:idea      # "I want to build something but don't know what"
