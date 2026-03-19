@@ -325,6 +325,25 @@ MCPize offers **85% revenue share** to developers. Factor this into projections:
 - At 100 users: $1,700/mo net
 - At 1,000 users: $17,000/mo net
 
+### Pricing Table Rules
+
+**IMPORTANT: Every pricing tier MUST include request/call limits.** This is critical for unit economics — without limits, a single free user could exhaust your API budget. Always specify:
+
+| Tier | Price | Calls/day | Features | Target Users |
+|------|-------|-----------|----------|-------------|
+| Free | $0/mo | X calls/day | [subset of tools] | Students, casual users |
+| Pro | $X/mo | Y calls/day | [more tools] | Individual professionals |
+| Team | $X/mo | Z calls/day | [all tools + extras] | Small teams |
+| Enterprise | $X/mo | Unlimited or custom | [everything + priority] | Large orgs |
+
+Guidelines for setting limits:
+- **Free**: Enough to try the product (10-100 calls/day), NOT enough to use it as a daily driver
+- **Pro**: Comfortable daily use for 1 person (200-1,000 calls/day)
+- **Team**: Multiple users, batch operations (1,000-5,000 calls/day)
+- **Enterprise**: Unlimited or negotiable, with SLA guarantees
+- Limits should scale with price — roughly 10x calls for 3-5x price
+- If your server uses paid APIs, calculate: at max usage per tier, what's the API cost? Ensure every paid tier is profitable even at full limit usage
+
 ### Monetization Score Card
 
 ```
@@ -401,6 +420,15 @@ List 5-10 MCP tools the server should expose:
 
 ## Monetization Plan
 [Summary from Step 4]
+
+### Recommended Pricing
+
+| Tier | Price | Calls/day | Max requests/mo | Features | Target Users |
+|------|-------|-----------|----------------|----------|-------------|
+| Free | $0/mo | X | ~Xх30 | [subset] | ... |
+| Pro | $X/mo | Y | ~Yх30 | [more tools] | ... |
+| Team | $X/mo | Z | ~Zх30 | [all + extras] | ... |
+| Enterprise | $X/mo | Unlimited | Unlimited | [everything] | ... |
 
 ## External API Cost & Billing Model
 > Only include this section if the server uses paid external APIs/data providers.

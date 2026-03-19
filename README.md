@@ -34,8 +34,7 @@ That's it. Now run:
 **One-shot** — let the skills chain automatically:
 
 ```
-> Using /mcpize:idea, /mcpize:build, and /mcpize:publish —
-  I'm a TypeScript dev, build me an MCP server for SEO audits and ship it.
+> using one by one /mcpize:idea → /mcpize:build → /mcpize:publish ship me an MCP server
 ```
 
 Idea discovery, build, deploy, publish — all in one prompt.

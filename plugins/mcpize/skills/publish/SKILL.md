@@ -145,6 +145,8 @@ This is an **irreversible action**. Follow the protocol:
 mcpize deploy --skip-wizard --yes
 ```
 
+> **Note**: Deploy creates the server with default "free" status — this is expected. The server is NOT visible on the marketplace yet (deploy = infrastructure only, publish = marketplace listing). Pricing gets set correctly in Step 3 during `mcpize publish`. Tell the user: "Don't worry about the 'free' status — that's just a deploy default. We'll set up real pricing in the next step."
+
 4. **Verify deployment**:
 ```bash
 mcpize status
