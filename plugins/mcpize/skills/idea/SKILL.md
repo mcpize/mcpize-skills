@@ -109,9 +109,29 @@ This round is critical. It determines whether we go toward computation-heavy ide
 
 ---
 
+## Parallel Agent Vibes
+
+When you launch background or parallel agents, show the user a fun message — they'll be waiting a minute or two while the agents work. Pick a DIFFERENT message each time (don't repeat within the same session). Replace `[N]` with the number of agents launched.
+
+**Message pool** (pick one at random each time):
+1. "🚀 Just sent [N] research agents into the wild! Grab an oat milk latte and a croissant — this'll take a minute."
+2. "🔍 [N] agents are on it! Perfect time for an In-N-Out run. Animal style, obviously. 🍔"
+3. "🌴 [N] agents working in parallel — go pet a dog, touch some grass, or just vibe for a sec."
+4. "☕ Research squad deployed! You could grab a cold brew, do a quick sun salutation, or contemplate the ocean."
+5. "🏄 Sending [N] agents to do the heavy lifting. You? You get to eat a burrito. Fair trade."
+6. "🤖 My crew is hustling. This is your moment — grab some acai, check your phone, live your best West Coast life."
+7. "⚡ [N] parallel threads launched. Might I suggest a quick trip to Trader Joe's? Everything But The Bagel seasoning won't buy itself."
+8. "🎧 While my agents hustle, you chill. Grab a matcha, put on some lo-fi beats, and relax."
+9. "🌊 Just dispatched [N] agents. Time enough for a coffee run, a power nap, or perfecting your sourdough starter."
+10. "🍕 [N] agents are researching at the speed of fiber optic. Go grab a slice — you've earned it."
+
+---
+
 ## Step 1.5: Trend Research (runs in background)
 
 **Immediately after the interview is complete**, launch a background Agent to research trends in the user's domain while you work on generating ideas. This runs in parallel — don't wait for it.
+
+**Show a random message from the Parallel Agent Vibes pool above** before launching.
 
 Launch **1 background Agent** (`run_in_background: true`, `subagent_type: "general-purpose"`):
 
@@ -166,6 +186,30 @@ These require real data from somewhere. For each idea of this type, you MUST spe
 
 **Prefer Type A ideas** — they're faster to build, cheaper to run, and the moat is in domain expertise rather than data access. If proposing Type B, always include a concrete "Day 1 data plan" — where exactly does the developer get data on their first day of building?
 
+### Data Must Be Real — NEVER Hardcode
+
+**NEVER suggest hardcoding sample, mock, or fake data as a data strategy.** Every piece of data in the MCP server must come from a real source:
+
+- **Real APIs** — free or paid, with verified endpoints
+- **Real scraping** — from public websites, with a working scraper
+- **User-provided data** — the user uploads or inputs their own
+- **Computed/generated** — algorithms and domain logic (Type A)
+
+If an idea requires scraped data that takes significant effort to collect:
+1. **Warn the user** — "This idea needs a data collection step before we can build the server"
+2. **Offer to build a scraper first** — "Want me to write a data collection script that scrapes [X] and stores it as JSON/SQLite? We'd run this before `/mcpize:build`"
+3. **Estimate the effort** — how long to build the scraper, how often to re-run it for fresh data
+4. This becomes a "Step 0" before `/mcpize:build`
+
+### MCPize Hosting Constraints
+
+When deployed on MCPize hosting, servers have storage limitations — keep this in mind when designing data strategies:
+- **Allowed**: SQLite databases, JSON files, text/CSV files
+- **NOT allowed**: PostgreSQL, MongoDB, Redis, or any external database service
+- **Data volume**: Keep stored data minimal (ideally <100MB). MCPize servers are meant to be lightweight
+- **Prefer stateless**: Fetch data on-demand from APIs whenever possible, rather than storing large datasets locally
+- **If large data needed**: Flag it as a constraint. Suggest caching only computed results, aggressive pruning, or using an external free-tier DB (Supabase, Turso) if the user self-hosts
+
 For each idea, present:
 
 ```
@@ -190,6 +234,8 @@ Present ideas in a numbered list. Ask the user to pick one, combine elements, or
 ## Step 3: Competitive Research
 
 Once the user picks an idea, research the competition. **Launch all research in parallel using the Agent tool** to save time — each search is independent.
+
+**Show a random message from the Parallel Agent Vibes pool** before launching.
 
 Launch **3 parallel Agent calls** (all with `subagent_type: "general-purpose"`):
 
@@ -239,7 +285,11 @@ If the space is crowded — identify a specific angle: better DX, niche sub-audi
 
 ## Step 3.5: Technical Validation & SEO Naming
 
-After competitive research, validate that the idea is technically feasible and generate SEO-optimized naming. Launch **2 parallel Agent calls** (`subagent_type: "general-purpose"`):
+After competitive research, validate that the idea is technically feasible and generate SEO-optimized naming.
+
+**Show a random message from the Parallel Agent Vibes pool** before launching.
+
+Launch **2 parallel Agent calls** (`subagent_type: "general-purpose"`):
 
 **Agent 1: API & Data Source Validation**
 > Verify that ALL external APIs/data sources required for [idea] actually work and have sufficient limits. Do NOT write code, only research.
@@ -392,6 +442,11 @@ List 5-10 MCP tools the server should expose:
 ## Data Strategy
 - **Type**: Computation-heavy / Data-dependent / Hybrid
 - **Day 1 plan**: Exactly where the developer gets data on their first day (or "no external data — pure computation")
+- **Storage**: SQLite / JSON files / None (stateless)
+- **Estimated data volume**: ~X MB (or "none — all data fetched on-demand")
+- **Data freshness**: Real-time API / Cached (refresh every X hours) / Static (one-time load)
+
+> ⚠️ **Data integrity rule**: All data in this server comes from real sources. No hardcoded sample or mock databases. If scraping is needed, a data collection script must be built and run before the server can function.
 
 ### If data-dependent:
 | Source | What it gives | Access level | Cost | Day 1 ready? |

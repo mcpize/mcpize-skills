@@ -179,6 +179,18 @@ Combine computation with minimal data. The data is free/easy to get, but the VAL
 - **Education** - LMS integration, grading, curriculum tools
 - **IoT/Hardware** - sensor data, device control, home automation
 
+### 9. Entertainment & Gaming
+- **Game server monitoring** - Minecraft server status (online/offline, player count, version), Valheim, ARK server tracking
+- **Console/PC gaming** - PlayStation trophy hunting (PSN Trophy Hunter on MCPize), Xbox achievements, Steam library analytics
+- **Esports & competitive** - match history, player stats, tournament brackets (Riot API, OpenDota API, Valve API)
+- **Streaming** - Twitch channel analytics, stream scheduling, clip management, YouTube Gaming
+- **Board games & puzzles** - Chess engine analysis (Stockfish), puzzle generators, game theory tools
+- **Game analytics** - playtime tracking, completion stats, backlog management, deal tracking (CheapShark, IsThereAnyDeal)
+- **Music & audio** - Spotify analytics, playlist management, music theory, chord progressions
+- Examples on MCPize: [Minecraft Server Status](https://mcpize.com/mcp/minecraft-server-status) (5.0★), [PSN Trophy Hunter](https://mcpize.com/mcp/psn-trophy-hunter) (free)
+- Emerging category: only ~0.6% of MCPize servers cover gaming (2/350+), massive whitespace
+- Free APIs: Riot Games API, Steam Web API, IGDB (via Twitch), CheapShark, PokéAPI, OpenDota, Scryfall (MTG)
+
 ---
 
 ## Underserved Niches (Market Gaps) {#niches}
@@ -203,6 +215,7 @@ Combine computation with minimal data. The data is free/easy to get, but the VAL
 13. **Insurance** — claims processing, policy comparison
 14. **Music** — DAW integration, music theory, chord progression
 15. **AI cost monitoring** — LLM billing/usage tracking across providers (no good solution exists)
+16. **Entertainment & Gaming** — only ~0.6% of MCPize servers (2/350+). Existing: Minecraft server status, PSN trophy tracking. Gaps: Xbox, Nintendo, Steam, Spotify, Netflix, esports data, mobile gaming (Roblox), game deal aggregation
 
 ### Top 10 most popular MCP servers (for competitive context):
 
@@ -226,6 +239,7 @@ Combine computation with minimal data. The data is free/easy to get, but the VAL
 4. Search & research (Brave, Kagi, Perplexity)
 5. SaaS/business tool integration (HubSpot, Salesforce, Google Workspace)
 6. Creative tools (Blender MCP, Ableton MCP, Figma-to-Cursor)
+7. Entertainment/gaming (nascent — high gap, low competition, strong community demand)
 
 ---
 
