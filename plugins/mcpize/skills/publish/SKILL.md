@@ -209,32 +209,58 @@ Confirm SEO content is configured and pricing is set.
 
 ## Step 4: Go-to-Market + Verification
 
-### 4a: Generate social media posts
+### 4a: Generate viral-pattern social posts
 
-Use templates from `${CLAUDE_SKILL_DIR}/references/social-templates.md` to create ready-to-copy-paste posts. Fill in placeholders with actual server name, description, tools, and listing URL.
+Use templates from `${CLAUDE_SKILL_DIR}/references/social-templates.md`. The templates apply 2025 X algorithm research — DO NOT fall back to old "🚀 Just launched / 🧵 Thread ↓ / features list" format.
 
-**Twitter/X Thread** (3-5 tweets):
+**Twitter/X — viral pattern (CRITICAL)**
+
+1. **Pick the right variant** (A/B/C) from social-templates.md based on the server's story:
+   - **Variant A** (Builder's confession) — niche/contrarian servers, vulnerability angle
+   - **Variant B** (Eat your own cooking) — when user is also the tool/skill author (strongest trust signal)
+   - **Variant C** (Specific number flex) — when there are concrete metrics (tool count, time, data points)
+
+2. **Fill placeholders** with actual server data: `{server_name}`, `{slug}`, `{one_liner}`, `{tool_count}`, `{key_benefit}`, etc.
+
+3. **Generate a Twitter Intent URL** so the user clicks once to publish:
+   - Take the chosen variant's main tweet body (NOT the reply — the marketplace link goes in a separate reply to avoid the -30-50% reach penalty for external links)
+   - URL-encode: spaces → `%20`, newlines → `%0A%0A`, `@` → `%40`, `:` → `%3A`, `/` → `%2F`, `'` → `%27`, `+` → `%2B`, `—` → `%E2%80%94`
+   - Format: `https://twitter.com/intent/tweet?text={encoded_text}`
+
+4. **Present to the user as a clickable markdown link** plus the reply text separately so they can copy-paste it after the main tweet goes live.
+
+**Output format (show this to the user):**
+
 ```
-Tweet 1: Hook — what problem does this solve?
-Tweet 2: What the server does (tools list)
-Tweet 3: How to install (one-liner)
-Tweet 4: Link to listing + call to action
+🐦 Your viral tweet is ready (variant B — builder/creator angle)
+
+Main tweet:
+─────────────────
+built fda-drug-info to query 50k+ drug labels in one call
+
+then used it to debug my mom's prescription interactions
+
+found 2 issues her pharmacist missed
+
+it's open source btw
+─────────────────
+
+[📤 Click to publish on X](https://twitter.com/intent/tweet?text=built%20fda-drug-info%20to%20query%2050k%2B...)
+
+After posting, reply to your own tweet with:
+─────────────────
+grab it → mcpize.com/mcp/fda-drug-info
+
+taking requests for the next build
+─────────────────
+
+Why this works:
+• Vulnerability + specific numbers (50k+, 2 issues) → high dwell time
+• Link in REPLY not main tweet → avoids -30-50% reach penalty
+• Question CTA in reply → triggers replies (13.5x algo weight)
 ```
 
-**Reddit r/mcp post**:
-- Title: "I built [server name] — [one-liner description]"
-- Body: problem → solution → tools → install instructions → link
-
-**LinkedIn post**:
-- Professional angle: "Excited to share [server name]..."
-- What it does, why it matters, link
-
-**Hacker News**:
-- Title: "Show HN: [server name] – [one-liner]"
-- Body: concise, technical, link
-
-**Discord message**:
-- Short and direct with install command
+**Other platforms** (Reddit, LinkedIn, HN, Discord) — generate using their respective templates from social-templates.md. These don't penalize links the way X does, so links stay in body. Tone still casual builder voice — no "Excited to share!" corporate openers.
 
 ### 4b: Update README with MCPize badges and install snippets
 
