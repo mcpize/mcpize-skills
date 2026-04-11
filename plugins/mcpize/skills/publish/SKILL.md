@@ -163,7 +163,8 @@ Confirm the status shows "ready" or "healthy".
 ### Determine pricing from brief
 
 Read the brief's Monetization section:
-- If "Free" or no pricing mentioned → use `--auto` (defaults to free)
+- If "Free" explicitly stated → use `--auto` (defaults to free)
+- If no pricing mentioned → default to **freemium** (matches `/mcpize:idea` default assumption). Use `--auto --pricing "Free: 50 requests/day. Pro $9.99/mo: 1000 requests/day"`
 - If "Freemium" or "Paid" → use `--auto --pricing "description from brief"`
 
 **CRITICAL — MCPize billing constraints (do NOT invent features that don't exist):**

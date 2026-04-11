@@ -63,6 +63,8 @@ Read the brief and extract these key pieces:
 | `credentials[]` | If BYOK mentioned | API keys each subscriber brings (e.g., GITHUB_TOKEN) |
 | `dependencies[]` | Technical Stack | npm/PyPI packages needed |
 | `errorHandling[]` | Error & Edge Case table | What to do when things go wrong |
+| `monetization` | Monetization section | Free / Freemium / Paid (informs `/mcpize:publish` pricing) |
+| `dataAccessLevel` | Data Strategy section | Instant / Easy / Moderate / Hard / Barrier |
 
 ### Create the plan
 
@@ -110,6 +112,10 @@ python3 --version && uv --version  # For Python projects
 **If mcpize is not installed**, use `AskUserQuestion`:
 - "Heads up — the `mcpize` CLI isn't installed yet. We need it to scaffold and deploy your server."
 - **Options**: "Install it for me (`npm install -g mcpize`)", "I'll install it myself", "Skip it for now"
+
+**If the brief lists external API keys** (`secrets[]` or `dataSources[]` with auth), warn early:
+- "Heads up — this server needs API keys to work: `{list of keys}`. Make sure you have them before we start testing. I'll create a `.env.example` file during scaffolding so you know exactly what's needed."
+- Don't block the build — scaffolding and coding work without keys. But testing will fail without them.
 
 **If mcpize is installed but user is not logged in** (`mcpize whoami` fails), let the user know:
 - "You'll need to log in before you can deploy or set secrets. You can do that now or later."
@@ -443,6 +449,15 @@ sleep 3                                    # Give it a sec to start up
 MCP_URL=http://localhost:3000 bash test-mcp.sh  # Run the smoke test
 kill %1                                     # Stop the server
 ```
+
+**CRITICAL**: Every curl call to `/mcp` in `test-mcp.sh` MUST include this header:
+```bash
+curl -X POST http://localhost:3000/mcp \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -d '{"jsonrpc":"2.0","method":"initialize","id":1,"params":{...}}'
+```
+Without `-H "Accept: application/json, text/event-stream"` the MCP SDK returns 406 Not Acceptable.
 
 If all tests pass, the server is working correctly. If any fail, fix the issue and re-run.
 
