@@ -186,6 +186,37 @@ These require real data from somewhere. For each idea of this type, you MUST spe
 
 **Prefer Type A ideas** — they're faster to build, cheaper to run, and the moat is in domain expertise rather than data access. If proposing Type B, always include a concrete "Day 1 data plan" — where exactly does the developer get data on their first day of building?
 
+### The LLM Test — CRITICAL Filter
+
+**Before proposing any idea, ask yourself: "Can an LLM do this without an MCP server?"**
+
+If the answer is yes — **kill the idea immediately**. An MCP server only has value when it does something an LLM cannot do on its own:
+
+| MCP server adds value | LLM can already do this (REJECT) |
+|----------------------|----------------------------------|
+| Fetch live data from an API (prices, weather, status) | Summarize text, generate content |
+| Query a database or dataset | Answer general knowledge questions |
+| Execute calculations with real-time inputs | Explain concepts, write tutorials |
+| Interact with external services (send, create, update) | Format, translate, or rewrite text |
+| Access private/authenticated data | Generate code from descriptions |
+| Run domain-specific algorithms on user data | Brainstorm ideas, make recommendations |
+
+**The value of an MCP server = access to data or actions the LLM doesn't have.**
+
+Examples of ideas that FAIL this test (do NOT suggest these):
+- ❌ "Code review MCP server" — LLM already reviews code
+- ❌ "Translation MCP server" — LLM already translates
+- ❌ "Writing assistant MCP server" — LLM IS a writing assistant
+- ❌ "Recipe generator" — LLM knows recipes
+
+Examples that PASS:
+- ✅ "FDA Drug Info" — queries live FDA database (LLM doesn't have access)
+- ✅ "Crypto Portfolio Tracker" — fetches real-time prices from CoinGecko
+- ✅ "GitHub Analytics" — accesses GitHub API for repo stats
+- ✅ "Astrology Calculator" — computes planetary positions using ephemeris math with exact timestamps
+
+For **Type A (computation-heavy)**: the LLM test passes when the computation requires precision, real-time inputs, or domain-specific algorithms that LLMs approximate poorly (financial math, astronomical calculations, statistical models).
+
 ### Data Must Be Real — NEVER Hardcode
 
 **NEVER suggest hardcoding sample, mock, or fake data as a data strategy.** Every piece of data in the MCP server must come from a real source:
