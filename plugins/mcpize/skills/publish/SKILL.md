@@ -166,12 +166,49 @@ Read the brief's Monetization section:
 - If "Free" or no pricing mentioned → use `--auto` (defaults to free)
 - If "Freemium" or "Paid" → use `--auto --pricing "description from brief"`
 
+**CRITICAL — MCPize billing constraints (do NOT invent features that don't exist):**
+
+MCPize supports exactly 3 plan types:
+
+| Type | How it works | Example |
+|------|-------------|---------|
+| `fixed` | Flat monthly/yearly subscription | Pro $19/mo, 500 requests/day |
+| `usage` | Pure pay-per-use, no base fee | $0.01 per request |
+| `hybrid` | Base subscription + overage pricing | $19/mo for 500 req + $0.005/req over limit |
+
+**Quotas are per-request and per-token only.** Rate limits are per second/minute/hour/day.
+
+**DO NOT generate pricing with:**
+- ❌ Seats / per-user pricing (MCPize bills per API request, not per user)
+- ❌ "Team" or "Enterprise" tiers with seats, SSO, HIPAA, BAA, SLA
+- ❌ "Contact sales" / "Custom pricing" options
+- ❌ Feature gating by tool name (all tools are available on all plans)
+- ❌ Any capability MCPize doesn't actually support
+
+**Valid pricing patterns:**
+```
+# Freemium
+"Free: 50 requests/day. Pro $9.99/mo: 1000 requests/day"
+
+# Usage-based
+"Pay per use: $0.01 per request, first 100 free"
+
+# Hybrid
+"Starter $9.99/mo: 500 requests/day. Pro $29/mo: 2000 requests/day, $0.005/req overage"
+```
+
+**Rules:**
+- Maximum 1 free plan (price_monthly: 0)
+- Paid plans must have price_monthly > 0
+- Unlimited quota only if price >= $50/mo OR usage/hybrid type with usage_price > 0
+- Differentiate plans by request quotas, rate limits, and token limits — not by features or seats
+
 ### Preview first (optional but recommended)
 
 ```bash
 mcpize publish --dry-run --auto
 # or
-mcpize publish --dry-run --auto --pricing "Free tier 100 calls/day, Pro $9.99/mo unlimited"
+mcpize publish --dry-run --auto --pricing "Free: 50 requests/day. Pro $9.99/mo: 1000 requests/day"
 ```
 
 Show the user what will happen before executing.
