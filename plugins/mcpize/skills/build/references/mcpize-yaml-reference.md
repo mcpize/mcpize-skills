@@ -109,6 +109,49 @@ credentials:
 credentials_mode: per_user      # Each subscriber has their own credentials
 ```
 
+### Managed OAuth (recommended for supported providers)
+
+Instead of asking users to manually paste tokens, use managed OAuth. MCPize handles the entire OAuth flow — users see a "Connect with GitHub" button, click it, authorize, done. Token refresh is automatic.
+
+```yaml
+credentials:
+  - name: GITHUB_TOKEN
+    required: true
+    description: Repository access for tracking
+    oauth_provider: github           # Managed OAuth provider
+    oauth_scopes:                    # Scopes to request
+      - repo
+      - read:user
+    mapping:
+      env: GITHUB_TOKEN
+      header: X-MCP-Github-Token
+credentials_mode: per_user
+```
+
+**Supported OAuth providers:** `github`, `google`, `slack`, `figma`, `facebook`, `shopify`, `hubspot`, `linear`, `notion`, `atlassian`, `discord`, `dropbox`, `spotify` (50+ total)
+
+**Multi-provider example** (server needs both GitHub and Figma):
+```yaml
+credentials:
+  - name: GITHUB_TOKEN
+    required: true
+    oauth_provider: github
+    oauth_scopes: [repo, read:user]
+    mapping:
+      env: GITHUB_TOKEN
+  - name: FIGMA_TOKEN
+    required: true
+    oauth_provider: figma
+    oauth_scopes: [file_content:read, file_metadata:read]
+    mapping:
+      env: FIGMA_TOKEN
+credentials_mode: per_user
+```
+
+Users see two "Connect" buttons. Each provider is connected independently. MCPize auto-refreshes expiring tokens (Google, Figma, HubSpot).
+
+**Auto-detection:** If you don't add `oauth_provider`, MCPize auto-detects it from credential names like `GITHUB_TOKEN`, `SLACK_BOT_TOKEN`, `FIGMA_TOKEN`. Explicit yaml always takes priority over auto-detection.
+
 ### Credential mapping options
 
 | Mapping | How it works |
@@ -125,6 +168,7 @@ credentials_mode: per_user      # Each subscriber has their own credentials
 | **When set** | At deploy time | When user subscribes |
 | **Example** | Your OpenAI key for server logic | User's GitHub token |
 | **Where in yaml** | `secrets:` | `credentials:` + `credentials_mode: per_user` |
+| **OAuth available?** | No | Yes — add `oauth_provider` for one-click connect |
 
 ## Example: Full Config with Secrets + Credentials
 
