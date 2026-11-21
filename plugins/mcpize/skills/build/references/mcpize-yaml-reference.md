@@ -204,3 +204,43 @@ credentials:
       env: GITHUB_TOKEN
 credentials_mode: per_user
 ```
+
+## Identifying the caller (HTTP servers)
+
+The MCPize gateway adds these headers to every authenticated request it forwards to your server:
+
+| Header | When it's sent | Use it for |
+|--------|----------------|------------|
+| `X-MCPize-User-ID` | Signed-in MCPize user | Stable per person, same across sessions and MCP clients. Key per-user state, rate limits, analytics on it. |
+| `X-MCPize-Server-ID` | With `X-MCPize-User-ID` | Your server's MCPize ID |
+| `X-MCPize-Subscription-ID` | Only when the request comes with a subscription | Optional, may be absent |
+| `X-MCPize-Proxy-Secret` | Self-hosted servers (your own endpoint URL) with "Firewall Protection" turned on in the server dashboard | Reject requests where it doesn't match |
+| `X-MCP-*` | Credentials mapped via `credentials[].mapping.header`, plus any `X-MCP-*` header the client sends | See [Credential mapping options](#credential-mapping-options) |
+
+- **Don't key users on `Authorization`.** On MCPize hosting it carries the gateway's Cloud Run IAM token, the same for everyone.
+- **Handle a missing `X-MCPize-User-ID`.** Requests with no signed-in user (like anonymous x402 pay-per-call) don't have it.
+- **Trust:** clients can't set `X-MCPize-*` headers. The gateway builds them itself and only forwards client headers that start with `X-MCP-`. Hosted servers only accept gateway traffic (Cloud Run IAM). Self-hosted servers should check `X-MCPize-Proxy-Secret`.
+- **HTTP only.** This needs `startCommand.type: http`. STDIO servers don't see HTTP headers.
+- Hosted servers with `credentials_mode: per_user` deployed before November 21, 2026 need one `mcpize deploy` to start getting these headers.
+
+TypeScript (`@modelcontextprotocol/sdk`, header names are lowercase):
+```typescript
+server.registerTool("my_tool", { inputSchema: {} }, async (_args, extra) => {
+  const userId = extra.requestInfo?.headers["x-mcpize-user-id"] as string | undefined;
+  if (!userId) return { content: [{ type: "text", text: "Sign in to MCPize to use this tool." }], isError: true };
+  // key per-user state on userId
+  return { content: [{ type: "text", text: `Hi ${userId}` }] };
+});
+```
+
+Python (FastMCP, returns `{}` outside an HTTP request):
+```python
+from fastmcp.server.dependencies import get_http_headers
+
+@mcp.tool()
+def my_tool() -> dict:
+    user_id = get_http_headers().get("x-mcpize-user-id")
+    if not user_id:
+        return {"error": "Sign in to MCPize to use this tool."}
+    return {"user": user_id}  # key per-user state on user_id
+```

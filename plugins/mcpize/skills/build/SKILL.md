@@ -191,6 +191,7 @@ Read `${CLAUDE_SKILL_DIR}/references/mcpize-yaml-reference.md` for the full sche
 - Add every secret from the brief under `secrets[]`
 - If the brief mentions subscribers bringing their own API keys (BYOK), add `credentials[]` with `credentials_mode: per_user`
 - **For OAuth-capable services** (GitHub, Google, Slack, Figma, etc.) — add `oauth_provider` and `oauth_scopes` to credentials. This gives users a "Connect with {Provider}" button instead of manual token entry. See the yaml reference for supported providers.
+- **Per-user state or limits?** Key them on the `X-MCPize-User-ID` header, not `Authorization`. See "Identifying the caller" in the yaml reference.
 - Include `configSchema.source: code` so MCPize auto-discovers your tools after deploy
 
 ---

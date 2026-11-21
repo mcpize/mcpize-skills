@@ -200,7 +200,7 @@ MCPize supports exactly 3 plan types:
 
 **Rules:**
 - Maximum 1 free plan (price_monthly: 0)
-- Paid plans must have price_monthly > 0
+- Paid plans must cost at least $5/mo (and at least $5/yr if yearly is set). Use 0 for a free plan. Pure usage plans (no monthly base fee) are exempt.
 - Unlimited quota only if price >= $50/mo OR usage/hybrid type with usage_price > 0
 - Differentiate plans by request quotas, rate limits, and token limits — not by features or seats
 

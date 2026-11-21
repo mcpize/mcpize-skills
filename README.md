@@ -122,7 +122,7 @@ mcpize-skills/
 
 ## Built with MCPize
 
-Part of the [MCPize](https://mcpize.com) ecosystem. MCPize gives developers 85% revenue share and handles hosting, payments, and discovery. These skills are the fastest path from zero to a published, monetizable MCP server.
+Part of the [MCPize](https://mcpize.com) ecosystem. MCPize gives developers 80% revenue share and handles hosting, payments, and discovery. These skills are the fastest path from zero to a published, monetizable MCP server.
 
 ## Examples
 

@@ -258,14 +258,14 @@ Combine computation with minimal data. The data is free/easy to get, but the VAL
 
 ### Revenue Benchmarks
 
-- **MCPize (recommended)**: 85% revenue share to developers, Stripe payouts, hosting available
+- **MCPize (recommended)**: 80% revenue share to developers, Stripe payouts, hosting available
 - Apify: pay-per-event model
 - Smithery: $30/month creator fee, no rev-share
 - 21st.dev: free first 5 requests, then $20/month
 
 ### Why MCPize for Distribution
 
-- Best revenue share in the market (85% to developer)
+- Best revenue share in the market (80% to developer)
 - Built-in hosting infrastructure
 - Stripe integration for payments
 - Growing marketplace with developer-focused audience
